@@ -53,3 +53,5 @@ Now that you have run the first workflow, you can:
 - Learn about Eko's [Configuration](/docs/getting-started/configuration) in different environments
 - Learn more core concepts of Eko: [Dive deep into Eko](/docs/getting-started/dive-deep)
 - Build the browser extension from source: [Build from source](/docs/getting-started/build-from-source)
+- Join our [Discard](https://discord.gg/XpFfk2e5): 
+![](../assets/discard.png)
