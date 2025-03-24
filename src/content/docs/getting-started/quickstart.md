@@ -45,6 +45,60 @@ If you want to view more logs, you can right-click on the Eko icon and select "I
 
 ![](../assets/inspect-popup.png)
 
+## As a Framework...
+
+As a framework, Eko provide some callbacks that allow developers DIY the implementions. There's an example:
+
+```typescript
+...
+export async function main(prompt: string) {
+  let chromeProxy = createChromeApiProxy(MyChromeProxy);
+  let config = await getLLMConfig(chromeProxy);
+  if (!config || !config.apiKey) {
+    printLog("Please configure apiKey", "error");
+    return;
+  }
+
+  let eko = new Eko(config as LLMConfig, { callback: hookLogs(), chromeProxy: chromeProxy });
+
+  const workflow = await eko.generate(prompt);
+
+  await eko.execute(workflow);
+}
+
+function hookLogs(): WorkflowCallback {
+  return {
+    hooks: {
+      beforeWorkflow: async (workflow) => {
+        printLog("Start workflow: " + workflow.name);
+      },
+      beforeSubtask: async (subtask, context) => {
+        printLog("> subtask: " + subtask.name);
+      },
+      beforeToolUse: async (tool, context, input) => {
+        printLog("> tool: " + tool.name);
+        return input;
+      },
+      afterToolUse: async (tool, context, result) => {
+        printLog("  tool: " + tool.name + " completed", "success");
+        return result;
+      },
+      afterSubtask: async (subtask, context, result) => {
+        printLog("  subtask: " + subtask.name + " completed", "success");
+      },
+      afterWorkflow: async (workflow, variables) => {
+        printLog("Completed", "success");
+      },
+      onLlmMessage: async (textContent) => {
+        printLog("LLM: " + textContent);
+      },
+    },
+  };
+}
+```
+
+For more details, see [Build from source](/docs/getting-started/build-from-source) and [Dive deep into Eko](/docs/getting-started/dive-deep).
+
 ## Next Steps
 
 Now that you have run the first workflow, you can:
