@@ -3,7 +3,12 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
-	base: '/docs',
+	base: '/eko/docs',
+	output: 'static',
+	outDir: './dist',
+	build: {
+		format: 'directory',
+	},
 	integrations: [
 		starlight({
 			title: 'Eko Docs',
@@ -76,3 +81,5 @@ export default defineConfig({
 		}),
 	],
 });
+
+// This config allows Astro to build for /docs, but we'll manually copy the output to /eko/docs in Dockerfile

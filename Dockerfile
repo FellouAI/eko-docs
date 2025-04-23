@@ -18,5 +18,15 @@ COPY . .
 RUN yarn build
 
 FROM httpd:2.4 AS runtime
+COPY --from=build /app/dist /usr/local/apache2/htdocs/eko/docs
 COPY --from=build /app/dist /usr/local/apache2/htdocs/docs
+
+# Add Apache rewrite rules
+RUN echo '\
+<IfModule mod_rewrite.c>\n\
+    RewriteEngine On\n\
+    RewriteRule ^/docs/(.*)$ /eko/docs/$1 [L,R=301]\n\
+</IfModule>\n\
+' >> /usr/local/apache2/conf/httpd.conf
+
 EXPOSE 80
