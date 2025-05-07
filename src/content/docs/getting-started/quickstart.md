@@ -1,103 +1,56 @@
 ---
 title: Quickstart
-description: This guide will walk you through creating your first Eko workflow in a browser extension environment.
+description: This guide will walk you through running your first Eko workflow.
 ---
 
-Let's create an Eko workflow together in a browser extension to automate the task that `Search Sam Altman's information and summarize it into markdown format for export`. 
+Here are two quick ways to get started:
+1. [**Using a browser extension**](#using-a-browser-extension): Suitable for those who just want to try it out or are not professionals.
+2. [**Running a Node.js script**](#writing-and-running-a-nodejs-script): Suitable for professionals who want to review or modify the code details.
 
-> With this plugin, you no longer need to manually open multiple web pages; instead, you can run everything with a single click.
+## Using a browser extension
 
-<video controls>
-  <source src="/docs/quickstart.mov" />
-</video>
+Let's run an Eko workflow together in a browser extension to automate the task that `Open Twitter, search for "Fellou AI" and follow`. 
 
-## Load extension
+### Load extension
 
-- Download latest stable version of [FellouAI/eko-browser-extension-template](https://github.com/FellouAI/eko-browser-extension-template/releases). Unzip the ZIP file to a suitable location, and you should see a `dist` folder.
+- Download the *precompiled extension* (coming soon, but you can [build it](./installation.md#install) yourself). Unzip the ZIP file to a suitable location, and you should see a `dist` folder.
 - Open the [Chrome browser](https://www.google.com/chrome/) and navigate to `chrome://extensions/`.
 - Turn on `Developer mode` (toggle switch in the top right corner).
 - Click `Load unpacked` button (the blue text in the top-left corner) and select the `dist` folder in the first step.
 - For **Chinese** users: If it's inconvenient to obtain an API key from the OpenAI or Claude platform, consider using mirror sites or services (such as [ZetaTechs API](https://api.zetatechs.com/)), and then replace the *Base URL* and *API key* with the corresponding values.
 
-<video controls>
-  <source src="/docs/load_extension.mov" />
-</video>
-
-## Configure LLM model API Key
+### Configure LLM model API Key
 
 - Click the `Details` button on the `eko agent` card.
 - Scroll down to find the `Extension options` section.
 - Open it and enter your LLM model API Key.
 
-<video controls>
-  <source src="/docs/config_llm.mov" />
-</video>
+### Let's run it!
+Open the side-bar of the extension:
+![](../assets/open-side-bar.png)
 
-## Let's run it!
-Pin the current extension in the browser's top-right extensions menu, click the extension to open the popup, input task prompt, and click the RUN button to execute.
-![](../assets/run_extension2.png)
-Run your workflow by clicking the RUN button in the extension popup.
-<video controls>
-  <source src="/docs/quickstart.mov" />
-</video>
+input your prompt, and click the Run button.
+![](../assets/run_extension3.png)
 
-If you want to view more logs, you can right-click on the Eko icon and select "Inspect popup", which will open the Chrome DevTools window. Once opened, please ensure that this window is not in focus to avoid any issues with some tools not functioning properly.
+## Writing and running a Node.js script
 
-![](../assets/inspect-popup.png)
+```bash
+# First we need to clone the Eko repository:
+git clone git@github.com:FellouAI/eko.git
 
-## As a Framework...
+# And `cd` to the `example/nodejs` floder:
+cd eko/example/nodejs
 
-As a framework, Eko provide some callbacks that allow developers DIY the implementions. There's an example:
+# Remember to set the environment variables (one of OpenAI/Claude):
+export OPENAI_BASE_URL=your_value
+export OPENAI_API_KEY=your_value
+export ANTHROPIC_BASE_URL=your_value
+export ANTHROPIC_API_KEY=your_value
 
-```typescript
-...
-export async function main(prompt: string) {
-  let chromeProxy = createChromeApiProxy(MyChromeProxy);
-  let config = await getLLMConfig(chromeProxy);
-  if (!config || !config.apiKey) {
-    printLog("Please configure apiKey", "error");
-    return;
-  }
-
-  let eko = new Eko(config as LLMConfig, { callback: hookLogs(), chromeProxy: chromeProxy });
-
-  const workflow = await eko.generate(prompt);
-
-  await eko.execute(workflow);
-}
-
-function hookLogs(): WorkflowCallback {
-  return {
-    hooks: {
-      beforeWorkflow: async (workflow) => {
-        printLog("Start workflow: " + workflow.name);
-      },
-      beforeSubtask: async (subtask, context) => {
-        printLog("> subtask: " + subtask.name);
-      },
-      beforeToolUse: async (tool, context, input) => {
-        printLog("> tool: " + tool.name);
-        return input;
-      },
-      afterToolUse: async (tool, context, result) => {
-        printLog("  tool: " + tool.name + " completed", "success");
-        return result;
-      },
-      afterSubtask: async (subtask, context, result) => {
-        printLog("  subtask: " + subtask.name + " completed", "success");
-      },
-      afterWorkflow: async (workflow, variables) => {
-        printLog("Completed", "success");
-      },
-      onLlmMessage: async (textContent) => {
-        printLog("LLM: " + textContent);
-      },
-    },
-  };
-}
+# Finally install dependencies and run:
+npm install
+npm run dev
 ```
-
-For more details, see [Build from source](/docs/getting-started/build-from-source) and [Dive deep into Eko](/docs/getting-started/dive-deep).
 
 ## Next Steps
 
