@@ -12,6 +12,8 @@ git clone git@github.com:FellouAI/eko.git
 cd eko
 ```
 
+And make sure you have [pnpm](https://pnpm.io/zh/installation) installed (or other JavaScript package managers).
+
 ## Browser Extension
 
 In the quickstart, we have seen how to use the browser extension. Now let's build one.
@@ -21,25 +23,25 @@ When building a browser extension that uses Eko, you'll need to:
 ### Install
 
 ```bash
-# set the environment variables for LLM API (one of OpenAI/Claude):
+# Set the environment variables for LLM API (one of OpenAI/Claude):
 export OPENAI_BASE_URL=your_value
 export OPENAI_API_KEY=your_value
 export ANTHROPIC_BASE_URL=your_value
 export ANTHROPIC_API_KEY=your_value
 
-# go to the example dictory
+# Go to the example dictory
 cd example/browser-extension
 
-# install dependencies
+# Install dependencies
 pnpm install
 
-# build the extension
+# Build the extension
 pnpm run build
 ```
 
 ### Usage Example
 ```typescript
-// example/browser-extension/src/background/main.ts
+// src/example/browser-extension/src/background/main.ts
 import { Eko, LLMs, StreamCallbackMessage } from "@eko-ai/eko";
 import { StreamCallback, HumanCallback } from "@eko-ai/eko/types";
 import BrowserAgent from "./browser";
@@ -108,25 +110,25 @@ Eko can also run in a Node.js environment, where it can achieve both browser use
 ### Install
 
 ```bash
-# set the environment variables for LLM API (one of OpenAI/Claude):
+# Set the environment variables for LLM API (one of OpenAI/Claude):
 export OPENAI_BASE_URL=your_value
 export OPENAI_API_KEY=your_value
 export ANTHROPIC_BASE_URL=your_value
 export ANTHROPIC_API_KEY=your_value
 
-# go to the example dictory
+# Go to the example dictory
 cd example/nodejs
 
-# install dependencies
+# Install dependencies
 pnpm install
 
-# build and run
+# Build and run
 pnpm run dev
 ```
 
 ### Usage Example
 ```typescript
-// example/nodejs/src/index.ts
+// src/example/nodejs/src/index.ts
 import dotenv from "dotenv";
 import ChatAgent from "./chat";
 import BrowserAgent from "./browser";
@@ -193,20 +195,21 @@ Eko can also be directly embedded into a web page environment. In this example, 
 
 ### Install
 ```bash
-# go to the example dictory
+# Go to the example dictory
 cd example/nodejs
 
-# install dependencies
+# Install dependencies
 pnpm install
 
 # NOTE: you should filling the LLM API key in the source code before building
 
-# build and run
+# Build and run
 pnpm run dev
 ```
 
 ### Usage Example
 ```typescript
+// src/example/browser-web/src/main.ts
 import { Eko, LLMs } from "@eko-ai/eko";
 import BrowserAgent from "./browser.ts";
 

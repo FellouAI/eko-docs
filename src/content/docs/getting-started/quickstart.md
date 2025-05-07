@@ -4,8 +4,8 @@ description: This guide will walk you through running your first Eko workflow.
 ---
 
 Here are two quick ways to get started:
-1. **Using a browser extension**: Suitable for those who just want to try it out or are not professionals.
-2. **Writing and running a Node.js script**: Suitable for professionals who want to review or modify the code details.
+1. [**Using a browser extension**](#using-a-browser-extension): Suitable for those who just want to try it out or are not professionals.
+2. [**Running a Node.js script**](#writing-and-running-a-nodejs-script): Suitable for professionals who want to review or modify the code details.
 
 ## Using a browser extension
 
@@ -13,7 +13,7 @@ Let's run an Eko workflow together in a browser extension to automate the task t
 
 ### Load extension
 
-- Download the [precompiled extension](../../../../public/dist.zip). Unzip the ZIP file to a suitable location, and you should see a `dist` folder.
+- Download the *precompiled extension* (coming soon, but you can [build it](./installation.md#install) yourself). Unzip the ZIP file to a suitable location, and you should see a `dist` folder.
 - Open the [Chrome browser](https://www.google.com/chrome/) and navigate to `chrome://extensions/`.
 - Turn on `Developer mode` (toggle switch in the top right corner).
 - Click `Load unpacked` button (the blue text in the top-left corner) and select the `dist` folder in the first step.
@@ -34,31 +34,20 @@ input your prompt, and click the Run button.
 
 ## Writing and running a Node.js script
 
-First we need to clone the Eko repository:
-```
+```bash
+# First we need to clone the Eko repository:
 git clone git@github.com:FellouAI/eko.git
-```
 
-Checkout to the `develop` branch:
-```
-git checkout develop
-```
-
-And `cd` to the `example/nodejs` floder:
-```
+# And `cd` to the `example/nodejs` floder:
 cd eko/example/nodejs
-```
 
-Remember to set the environment variables (one of OpenAI/Claude):
-```
+# Remember to set the environment variables (one of OpenAI/Claude):
 export OPENAI_BASE_URL=your_value
 export OPENAI_API_KEY=your_value
 export ANTHROPIC_BASE_URL=your_value
 export ANTHROPIC_API_KEY=your_value
-```
 
-Finally install dependencies and run:
-```
+# Finally install dependencies and run:
 npm install
 npm run dev
 ```
