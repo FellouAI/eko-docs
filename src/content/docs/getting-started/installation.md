@@ -12,6 +12,8 @@ git clone git@github.com:FellouAI/eko.git
 cd eko
 ```
 
+You may need to `git checkout v2` to checkout the correct branch.
+
 And make sure you have [pnpm](https://pnpm.io/zh/installation) installed (or other JavaScript package managers).
 
 ## Browser Extension
