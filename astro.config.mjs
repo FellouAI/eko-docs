@@ -57,8 +57,8 @@ export default defineConfig({
 					items: [
 						// Each item here is one entry in the navigation menu.
 						{ label: 'Overview', slug: 'agents' },
-						{ label: 'Browser Agent', slug: 'agents/browser-agent' },
 						{ label: 'Available Agent', slug: 'agents/available-agent' },
+						{ label: 'Browser Agent', slug: 'agents/browser-agent' },
 						{ label: 'Custom Agent', slug: 'agents/custom-agent' },
 						{ label: 'Agent Tools', slug: 'agents/agent-tools' },
 					],
