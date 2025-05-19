@@ -73,7 +73,7 @@ let result = await eko.run(`
 `);
 ```
 
-Learn more: [Available Agent](/docs/agents/available-agent).
+Learn more: [Available Agent](/eko/docs/agents/available-agent).
 
 ### Custom agent
 
@@ -126,12 +126,12 @@ let result = await eko.run(`
 `);
 ```
 
-Learn more: [Custom Agent](/docs/agents/custom-agent).
+Learn more: [Custom Agent](/eko/docs/agents/custom-agent).
 
 ## Next Steps
 
 Now that you have understood the concept of an agent, let's take a look at the built-in agents and how to customize agents:
 
-- Built-in [Available Agent](/docs/agents/available-agent) of the framework in different environments
-- Learn how to [Custom Agent](/docs/agents/custom-agent)
-- Learn how to [Agent Tools](/docs/agents/agent-tools)
+- Built-in [Available Agent](/eko/docs/agents/available-agent) of the framework in different environments
+- Learn how to [Custom Agent](/eko/docs/agents/custom-agent)
+- Learn how to [Agent Tools](/eko/docs/agents/agent-tools)
