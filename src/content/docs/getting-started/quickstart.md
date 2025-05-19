@@ -13,7 +13,7 @@ Let's run an Eko workflow together in a browser extension to automate the task t
 
 ### Load extension
 
-- Download the *precompiled extension* (or you can also [build it](./installation.md#install) yourself). Unzip the ZIP file to a suitable location, and you should see a `dist` folder.
+- Download the *[precompiled extension](https://github.com/FellouAI/eko-demos/raw/refs/heads/main/browser-extension-dist/dist.zip)* (or you can also [build it](./installation.md#install) yourself). Unzip the ZIP file to a suitable location, and you should see a `dist` folder.
 - Open the [Chrome browser](https://www.google.com/chrome/) and navigate to `chrome://extensions/`.
 - Turn on `Developer mode` (toggle switch in the top right corner).
 - Click `Load unpacked` button (the blue text in the top-left corner) and select the `dist` folder in the first step.
