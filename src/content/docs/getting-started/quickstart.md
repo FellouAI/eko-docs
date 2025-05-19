@@ -13,24 +13,31 @@ Let's run an Eko workflow together in a browser extension to automate the task t
 
 ### Load extension
 
-- Download the *precompiled extension* (coming soon, but you can [build it](./installation.md#install) yourself). Unzip the ZIP file to a suitable location, and you should see a `dist` folder.
+- Download the *[precompiled extension](https://github.com/FellouAI/eko-demos/raw/refs/heads/main/browser-extension-dist/dist.zip)* (or you can also [build it](./installation.md#install) yourself). Unzip the ZIP file to a suitable location, and you should see a `dist` folder.
 - Open the [Chrome browser](https://www.google.com/chrome/) and navigate to `chrome://extensions/`.
 - Turn on `Developer mode` (toggle switch in the top right corner).
 - Click `Load unpacked` button (the blue text in the top-left corner) and select the `dist` folder in the first step.
-- For **Chinese** users: If it's inconvenient to obtain an API key from the OpenAI or Claude platform, consider using mirror sites or services (such as [ZetaTechs API](https://api.zetatechs.com/)), and then replace the *Base URL* and *API key* with the corresponding values.
+
+![](../assets/load-1.jpeg)
+![](../assets/load-2.jpeg)
+![](../assets/load-3.jpeg)
+![](../assets/load-4.jpeg)
 
 ### Configure LLM model API Key
 
-- Click the `Details` button on the `eko agent` card.
-- Scroll down to find the `Extension options` section.
-- Open it and enter your LLM model API Key.
+- If it's inconvenient to obtain an API key from the OpenAI or Claude platform, consider using proxy sites or services (such as [OpenRouter](https://openrouter.ai/)), and then replace the *Base URL* and *API key* with the corresponding values.
+
+![](../assets/configure-1.jpeg)
+![](../assets/configure-2.jpeg)
 
 ### Let's run it!
 Open the side-bar of the extension:
-![](../assets/open-side-bar.png)
+
+![](../assets/open-side-bar.jpeg)
 
 input your prompt, and click the Run button.
-![](../assets/run_extension3.png)
+
+![](../assets/run_extension3.jpeg)
 
 ## Writing and running a Node.js script
 
