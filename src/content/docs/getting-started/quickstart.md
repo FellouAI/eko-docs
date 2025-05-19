@@ -17,6 +17,7 @@ Let's run an Eko workflow together in a browser extension to automate the task t
 - Open the [Chrome browser](https://www.google.com/chrome/) and navigate to `chrome://extensions/`.
 - Turn on `Developer mode` (toggle switch in the top right corner).
 - Click `Load unpacked` button (the blue text in the top-left corner) and select the `dist` folder in the first step.
+
 ![](../assets/load-1.jpeg)
 ![](../assets/load-2.jpeg)
 ![](../assets/load-3.jpeg)
@@ -31,9 +32,11 @@ Let's run an Eko workflow together in a browser extension to automate the task t
 
 ### Let's run it!
 Open the side-bar of the extension:
+
 ![](../assets/open-side-bar.jpeg)
 
 input your prompt, and click the Run button.
+
 ![](../assets/run_extension3.jpeg)
 
 ## Writing and running a Node.js script
