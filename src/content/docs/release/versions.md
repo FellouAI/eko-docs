@@ -5,6 +5,14 @@ description: Eko version update history
 
 Eko NPM: [@eko-ai/eko](https://www.npmjs.com/package/@eko-ai/eko).
 
+## v2.0.8 - 2025-05-20
+
+### Overview
+- Supports multi-agent architecture, refactors the eko framework
+
+### Improvements
+- **eko framework:** Framework refactoring, supports multi-agent.
+
 ## v1.0.9 - 2025-02-05
 
 ### Overview

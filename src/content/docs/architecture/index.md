@@ -67,32 +67,23 @@ Eko provides consistent capabilities across different JavaScript environments wh
 
 See [Environment-Aware Architecture](/docs/architecture/env-architecture) for details on how Eko adapts to each environment.
 
-## Tool System
+## Agent System
 
-Tools are the building blocks of automation in Eko:
+Agents are the building blocks of automation in Eko:
 
-### Tool Definition
+### Agent Definition
+
+- Each agent has a unique name and description
+- Must include one or more tools
+
+### Agent Tool
 
 - Each tool has a unique name and description
 - Defines its input schema and requirements
 - Implements specific execution logic
 - Can access shared execution context
 
-### Tool Registration
-
-- Manages available tools for each environment
-- Handles tool registration and validation
-- Provides tool enumeration and metadata
-- Ensures tool compatibility
-
-### Tool Categories
-
-- Browser automation tools (OpenUrl, BrowserUse, etc.)
-- System interaction tools (FileRead, CommandExecute, etc.)
-- Content processing tools (ExtractContent, ExportFile, etc.)
-- Custom tool support for extensibility
-
-Learn more in the documentation on [Tools Overview](/docs/tools/overview).
+Learn more in the documentation on [Agents Overview](/eko/docs/agents).
 
 ## Hook System
 
