@@ -8,24 +8,24 @@ description: Eko (pronounced like “echo”) is a powerful framework designed f
 ## What is Eko?
 Eko (pronounced like “echo”) is a powerful framework designed for building production-ready Agent workflows. It provides an efficient, cross-platform solution for automating the planning and execution of workflows. Additionally, Eko offers highly customizable interfaces that empower developers to design workflows freely, ensuring they meet production-level requirements.
 
-*TODO: update architecture.png*
+<!-- *TODO: update architecture.png* -->
 
 ![](../assets/architecture.png)
 
 # Framework Comparison
 
-| Feature                              | Eko   | Langchain  | Browser-use  | Dify.ai  | Coze   | 
-|--------------------------------------|-------|------------|--------------|----------|--------|
-| **Supported Platform**               | **All platform**  | Server side  | Browser  | Web  | Web  |
-| **One sentence to multi-step workflow** | ✅    | ❌          | ✅            | ❌        | ❌      |
-| **Intervenability**                  | ✅    | ✅          | ❌            | ❌        | ❌      | 
-| **Development Efficiency**           | **High**  | Low      | Middle        | Middle    | Low    |
-| **Open-source**                      | ✅    | ✅          | ✅            | ✅        | ❌      | 
-| **Access to private web resources** | ✅ **(Coming soon)** | ❌          | ❌            | ❌        | ❌      |
+| Feature                                 | Eko                 | Langchain   | Browser-use | Dify.ai | Coze |
+| --------------------------------------- | ------------------- | ----------- | ----------- | ------- | ---- |
+| **Supported Platform**                  | **All platform**    | Server side | Browser     | Web     | Web  |
+| **One sentence to multi-step workflow** | ✅                   | ❌           | ✅           | ❌       | ❌    |
+| **Intervenability**                     | ✅                   | ✅           | ❌           | ❌       | ❌    |
+| **Development Efficiency**              | **High**            | Low         | Middle      | Middle  | Low  |
+| **Open-source**                         | ✅                   | ✅           | ✅           | ✅       | ❌    |
+| **Access to private web resources**     | ✅ **(Coming soon)** | ❌           | ❌           | ❌       | ❌    |
 
 ## Eko's Abilities
 
-*TODO: update demos*
+<!-- *TODO: update demos* -->
 
 - **Browser Use**
 

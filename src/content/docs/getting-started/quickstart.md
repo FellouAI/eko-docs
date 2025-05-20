@@ -94,8 +94,8 @@ ts-node index.ts
 
 Now that you have run the first workflow, you can:
 
-- Understand the [Installation](/eko/docs/getting-started/installation) of Eko in different environments
-- Learn about Eko's [Configuration](/eko/docs/getting-started/configuration) in different environments
-- Learn more core concepts of Eko: *TODO: more core concepts of Eko*
+- Understand the [Installation](/eko/docs/getting-started/installation) of Eko in different environments.
+- Learn [Architecture](../architecture) of Eko.
+- Try different [Configurations](/eko/docs/getting-started/configuration) of Eko.
 - Join our [Discard](https://discord.gg/XpFfk2e5): 
 ![](../assets/discard.png)
