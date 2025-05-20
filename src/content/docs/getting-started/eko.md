@@ -23,9 +23,9 @@ Eko (pronounced like “echo”) is a powerful framework designed for building p
 | **Open-source**                         | ✅                   | ✅           | ✅           | ✅       | ❌    |
 | **Access to private web resources**     | ✅ **(Coming soon)** | ❌           | ❌           | ❌       | ❌    |
 
-## Eko's Abilities
-
 <!-- *TODO: update demos* -->
+
+<!-- ## Eko's Abilities
 
 - **Browser Use**
 
@@ -60,23 +60,22 @@ Eko (pronounced like “echo”) is a powerful framework designed for building p
 </video>
 
 
-Learn more: [Eko Demos](https://github.com/FellouAI/eko-demos).
+Learn more: [Eko Demos](https://github.com/FellouAI/eko-demos). -->
 
 
 ## Supported environment
 ![ENVS](../assets/envs.png)
 
 Learn more:
-- [Browser Extension Environment](/docs/browseruse/browser-extension)
-- [Web Environment](/docs/browseruse/browser-web)
-- [Node.js Environment](/docs/computeruse/computer-node)
-- [Next-Gen AI Browser Fellou Environment](/docs/computeruse/computer-fellou)
+- [Browser Extension Environment](installation#browser-extension)
+- [Web Environment](installation#web-environment)
+- [Node.js Environment](installation#nodejs-environment)
+- [Next-Gen AI Browser Fellou Environment](https://fellou.ai/)
 
 ## Getting started
 - [Quickstart](quickstart)
 - [Installation](installation)
 - [Configuration](configuration)
-- [Diving deep into Eko](dive-deep)
 
 ## Support and Community
 - [GitHub Issues](https://github.com/FellouAI/eko/issues) for bug reports and feature requests
