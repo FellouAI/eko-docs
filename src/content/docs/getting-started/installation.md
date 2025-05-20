@@ -43,7 +43,7 @@ pnpm run build
 
 ### Usage Example
 ```typescript
-// src/example/browser-extension/src/background/main.ts
+// example/browser-extension/src/background/main.ts
 import { Eko, LLMs, StreamCallbackMessage } from "@eko-ai/eko";
 import { StreamCallback, HumanCallback } from "@eko-ai/eko/types";
 import BrowserAgent from "./browser";
@@ -130,7 +130,7 @@ pnpm run dev
 
 ### Usage Example
 ```typescript
-// src/example/nodejs/src/index.ts
+// example/nodejs/src/index.ts
 import dotenv from "dotenv";
 import ChatAgent from "./chat";
 import BrowserAgent from "./browser";
@@ -211,7 +211,7 @@ pnpm run dev
 
 ### Usage Example
 ```typescript
-// src/example/browser-web/src/main.ts
+// example/browser-web/src/main.ts
 import { Eko, LLMs } from "@eko-ai/eko";
 import BrowserAgent from "./browser.ts";
 

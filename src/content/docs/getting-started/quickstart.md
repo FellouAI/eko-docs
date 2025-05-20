@@ -5,7 +5,7 @@ description: This guide will walk you through running your first Eko workflow.
 
 Here are two quick ways to get started:
 1. [**Using a browser extension**](#using-a-browser-extension): Suitable for those who just want to try it out or are not professionals.
-2. [**Running a Node.js script**](#writing-and-running-a-nodejs-script): Suitable for professionals who want to review or modify the code details.
+2. [**Running a Node.js script**](#running-a-nodejs-script): Suitable for professionals who want to review or modify the code details.
 
 ## Using a browser extension
 
@@ -13,59 +13,89 @@ Let's run an Eko workflow together in a browser extension to automate the task t
 
 ### Load extension
 
-- Download the *[precompiled extension](https://github.com/FellouAI/eko-demos/raw/refs/heads/main/browser-extension-dist/dist.zip)* (or you can also [build it](./installation.md#install) yourself). Unzip the ZIP file to a suitable location, and you should see a `dist` folder.
+- Download the *[precompiled extension](https://github.com/FellouAI/eko-demos/raw/refs/heads/main/browser-extension-dist/dist.zip)* (or you can also [build it](./installation#install) yourself). Unzip the ZIP file to a suitable location, and you should see a `dist` folder.
 - Open the [Chrome browser](https://www.google.com/chrome/) and navigate to `chrome://extensions/`.
 - Turn on `Developer mode` (toggle switch in the top right corner).
 - Click `Load unpacked` button (the blue text in the top-left corner) and select the `dist` folder in the first step.
 
-![](../assets/load-1.jpeg)
-![](../assets/load-2.jpeg)
-![](../assets/load-3.jpeg)
-![](../assets/load-4.jpeg)
+*Picture here*
 
 ### Configure LLM model API Key
 
 - If it's inconvenient to obtain an API key from the OpenAI or Claude platform, consider using proxy sites or services (such as [OpenRouter](https://openrouter.ai/)), and then replace the *Base URL* and *API key* with the corresponding values.
 
-![](../assets/configure-1.jpeg)
-![](../assets/configure-2.jpeg)
+*Picture here*
 
 ### Let's run it!
 Open the side-bar of the extension:
 
-![](../assets/open-side-bar.jpeg)
+*Picture here*
 
-input your prompt, and click the Run button.
+Input your prompt, and click the Run button:
 
-![](../assets/run_extension3.jpeg)
+*Picture here*
 
-## Writing and running a Node.js script
+## Running a Node.js script
 
+First we need to create a new project:
 ```bash
-# First we need to clone the Eko repository:
-git clone git@github.com:FellouAI/eko.git
+mkdir try-eko
+cd try-eko
+npm init
+```
 
-# And `cd` to the `example/nodejs` floder:
-cd eko/example/nodejs
+And install dependencies:
+```bash
+npm add @eko-ai/eko @eko-ai/eko-nodejs ts-node
+```
 
-# Remember to set the environment variables (one of OpenAI/Claude):
+Then write a script named `index.ts`:
+```ts
+// index.ts
+import { Eko, Agent, LLMs } from "@eko-ai/eko";
+import { BrowserAgent } from "@eko-ai/eko-nodejs";
+
+async function run() {
+  let llms: LLMs = {
+    default: {
+      provider: "anthropic",
+      model: "claude-3-5-sonnet-20241022",
+      apiKey: "sk-xxx", // replace it with your API KEY
+      config: {
+        baseURL: "https://api.anthropic.com/v1",
+      },
+    },
+  };
+  let agents: Agent[] = [new BrowserAgent()];
+  let eko = new Eko({ llms, agents });
+  let result = await eko.run("Search for the latest news about Musk");
+  console.log("result: ", result.result);
+}
+
+run().catch(e => {
+  console.log(e)
+});
+```
+
+Remember to set the environment variables (one of OpenAI/Claude):
+```bash
 export OPENAI_BASE_URL=your_value
 export OPENAI_API_KEY=your_value
 export ANTHROPIC_BASE_URL=your_value
 export ANTHROPIC_API_KEY=your_value
+```
 
-# Finally install dependencies and run:
-npm install
-npm run dev
+Finally run it:
+```bash
+ts-node index.ts
 ```
 
 ## Next Steps
 
 Now that you have run the first workflow, you can:
 
-- Understand the [Installation](/docs/getting-started/installation) of Eko in different environments
-- Learn about Eko's [Configuration](/docs/getting-started/configuration) in different environments
-- Learn more core concepts of Eko: [Dive deep into Eko](/docs/getting-started/dive-deep)
-- Build the browser extension from source: [Build from source](/docs/getting-started/build-from-source)
+- Understand the [Installation](/eko/docs/getting-started/installation) of Eko in different environments
+- Learn about Eko's [Configuration](/eko/docs/getting-started/configuration) in different environments
+- Learn more core concepts of Eko: *TODO: more core concepts of Eko*
 - Join our [Discard](https://discord.gg/XpFfk2e5): 
 ![](../assets/discard.png)
