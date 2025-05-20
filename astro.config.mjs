@@ -24,32 +24,43 @@ export default defineConfig({
 						{ label: 'Quickstart', slug: 'getting-started/quickstart' },
 						{ label: 'Installation', slug: 'getting-started/installation' },
 						{ label: 'Configuration', slug: 'getting-started/configuration' },
-						{ label: 'Dive deep into Eko', slug: 'getting-started/dive-deep' },
-						{ label: 'Build from source', slug: 'getting-started/build-from-source' },
+						// { label: 'Dive deep into Eko', slug: 'getting-started/dive-deep' },
+						// { label: 'Build from source', slug: 'getting-started/build-from-source' },
 					],
 				},
+				// {
+				// 	label: 'Browser use',
+				// 	items: [
+				// 		{ label: 'Browser Extension', slug: 'browseruse/browser-extension' },
+				// 		{ label: 'Web', slug: 'browseruse/browser-web' },
+				// 	],
+				// },
+				// {
+				// 	label: 'Computer use',
+				// 	items: [
+				// 		{ label: 'Node.js', slug: 'computeruse/computer-node' }, // headless browser, MCP, Computer use
+				// 		{ label: 'Fellou', slug: 'computeruse/computer-fellou' },
+				// 	],
+				// },
+				// {
+				// 	label: 'Tools',
+				// 	items: [
+				// 		// Each item here is one entry in the navigation menu.
+				// 		{ label: 'Overview', slug: 'tools/overview' },
+				// 		{ label: 'Available tools', slug: 'tools/available' },
+				// 		{ label: 'Custom tools', slug: 'tools/custom' },
+				// 		{ label: 'Tools hook', slug: 'tools/hook' },
+				// 	],
+				// },
 				{
-					label: 'Browser use',
-					items: [
-						{ label: 'Browser Extension', slug: 'browseruse/browser-extension' },
-						{ label: 'Web', slug: 'browseruse/browser-web' },
-					],
-				},
-				{
-					label: 'Computer use',
-					items: [
-						{ label: 'Node.js', slug: 'computeruse/computer-node' }, // headless browser, MCP, Computer use
-						{ label: 'Fellou', slug: 'computeruse/computer-fellou' },
-					],
-				},
-				{
-					label: 'Tools',
+					label: 'Agents',
 					items: [
 						// Each item here is one entry in the navigation menu.
-						{ label: 'Overview', slug: 'tools/overview' },
-						{ label: 'Available tools', slug: 'tools/available' },
-						{ label: 'Custom tools', slug: 'tools/custom' },
-						{ label: 'Tools hook', slug: 'tools/hook' },
+						{ label: 'Overview', slug: 'agents' },
+						{ label: 'Available Agent', slug: 'agents/available-agent' },
+						{ label: 'Browser Agent', slug: 'agents/browser-agent' },
+						{ label: 'Custom Agent', slug: 'agents/custom-agent' },
+						{ label: 'Agent Tools', slug: 'agents/agent-tools' },
 					],
 				},
 				{
@@ -58,8 +69,8 @@ export default defineConfig({
 						// Each item here is one entry in the navigation menu.
 						{ label: 'Overview', slug: 'architecture' },
 						{ label: 'Hierarchical Planning', slug: 'architecture/execution-model' },
-						{ label: 'Environment-Aware Architecture', slug: 'architecture/env-architecture' },
-						{ label: 'Workflow', slug: 'architecture/workflow' },
+						// { label: 'Environment-Aware Architecture', slug: 'architecture/env-architecture' },
+						// { label: 'Workflow', slug: 'architecture/workflow' },
 						{ label: 'Hook system', slug: 'architecture/hook-system' },
 						{ label: 'Web Information Extraction', slug: 'architecture/web-extraction' },
 					],
