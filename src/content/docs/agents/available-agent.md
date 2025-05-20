@@ -49,7 +49,7 @@ The agent is built-in with the following tools:
 * `switch_tab`: Switch to the specified tab page
 * `wait`: Wait for specified duration
 
-## Nodejs
+## Node.js
 
 ### BrowserAgent
 `Browser`: Use browser agent to operate the browser.
