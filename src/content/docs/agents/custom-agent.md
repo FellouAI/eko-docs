@@ -242,7 +242,7 @@ let agents: Agent[] = [
 ];
 
 let eko = new Eko({ llms, agents });
-let result = await eko.run("我有3000块钱，请帮我购买一套夏天衣服、裤子、鞋子");
+let result = await eko.run("I have $300, please help me buy a set of summer clothes, pants, and shoes.");
 
 ```
 
