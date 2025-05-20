@@ -8,11 +8,11 @@ Eko is a JavaScript library that can be used in [Browser Extension](#browser-ext
 Before starting, we should clone the repository:
 
 ```bash
-git clone git@github.com:FellouAI/eko.git
+git clone https://github.com/FellouAI/eko.git
 cd eko
+pnpm install
+pnpm run build
 ```
-
-You may need to `git checkout v2` to checkout the correct branch.
 
 And make sure you have [pnpm](https://pnpm.io/zh/installation) installed (or other JavaScript package managers).
 
@@ -43,8 +43,9 @@ pnpm run build
 import { Eko, LLMs } from "@eko-ai/eko";
 import { BrowserAgent } from "@eko-ai/eko-extension";
 
-export async function main(prompt: string): Promise<Eko> {
-  let config = await chrome.storage.sync.get(["llmConfig"])["llmConfig"];
+export async function main(prompt: string) {
+  let key = "llmConfig";
+  let config = await chrome.storage.sync.get([key])[key];
 
   const llms: LLMs = {
     default: {
@@ -59,13 +60,7 @@ export async function main(prompt: string): Promise<Eko> {
 
   let agents = [new BrowserAgent()];
   let eko = new Eko({ llms, agents });
-  eko
-    .run(prompt)
-    .finally(() => {
-      chrome.storage.local.set({ running: false });
-      chrome.runtime.sendMessage({ type: "stop" });
-    });
-  return eko;
+  await eko.run(prompt);
 }
 ```
 
@@ -89,8 +84,8 @@ pnpm run dev
 ### Usage Example
 ```typescript
 // example/nodejs/src/index.ts
-import { BrowserAgent } from "@eko-ai/eko-nodejs";
 import { Eko, Agent, LLMs } from "@eko-ai/eko";
+import { BrowserAgent } from "@eko-ai/eko-nodejs";
 
 const llms: LLMs = {
   default: {

@@ -174,3 +174,5 @@ async execute(
   };
 }
 ```
+
+Specific hook descriptions please refer to: [Hook system](/eko/docs/architecture/hook-system).

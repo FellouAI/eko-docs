@@ -14,7 +14,7 @@ The **Browser Agent** is a built-in Agent in Eko, designed to interact with web 
 - Utility: `wait`
 
 **Supported environments:**
-- Browser extension (Chrome/Edge)
+- Browser extension (Chrome)
 - Node.js (headless or visible browser via Playwright)
 - Web (sandboxed, limited to current page)
 
@@ -22,7 +22,7 @@ The **Browser Agent** is a built-in Agent in Eko, designed to interact with web 
 The Browser Agent is implemented as a set of extensible classes:
 
 - [`BaseBrowserAgent`](../../../packages/eko-core/src/agent/browser/browser_base.ts):  
-  Extends `Agent`, defining the core interface for browser agents, including methods for navigation, tab management, and screenshot capture.
+  Extends `Agent`, defining the core interface for browser agents, including screenshots, navigation, tag management and execution methods of js scripts.
 
 - [`BaseBrowserLabelsAgent`](../../../packages/eko-core/src/agent/browser/browser_labels.ts):  
   Extends `BaseBrowserAgent` to provide element-level interaction using indexed elements, screenshot-and-HTML extraction, and tool-based operations. This is the main base for browser automation in extension/web/Node.js environments.
@@ -131,11 +131,34 @@ await agent.scroll_to_element(5); // Scroll to element with index 5
 - Always use the latest element list returned by `screenshot_and_html` or similar methods to determine valid indexes.
 - For advanced scenarios, extend `BaseBrowserLabelsAgent` or `BaseBrowserScreenAgent` for custom logic.
 
+### Custom Browser
+```ts
+import { AgentContext, BaseBrowserLabelsAgent } from "@eko-ai/eko";
+
+export class E2bBrowser extends BaseBrowserLabelsAgent {
+  protected screenshot(agentContext: AgentContext): Promise<{ imageBase64: string; imageType: "image/jpeg" | "image/png"; }> {
+    throw new Error("Method not implemented.");
+  }
+  protected navigate_to(agentContext: AgentContext, url: string): Promise<{ url: string; title?: string; }> {
+    throw new Error("Method not implemented.");
+  }
+  protected get_all_tabs(agentContext: AgentContext): Promise<Array<{ tabId: number; url: string; title: string; }>> {
+    throw new Error("Method not implemented.");
+  }
+  protected switch_tab(agentContext: AgentContext, tabId: number): Promise<{ tabId: number; url: string; title: string; }> {
+    throw new Error("Method not implemented.");
+  }
+  protected execute_script(agentContext: AgentContext, func: (...args: any[]) => void, args: any[]): Promise<any> {
+    throw new Error("Method not implemented.");
+  }
+}
+```
+
 ## API Reference
 - Class and method summaries for:
-  - `BaseBrowserAgent`
-  - `BaseBrowserLabelsAgent`
-  - `BaseBrowserScreenAgent`
+  - [BaseBrowserAgent](/eko/docs/api/classes/BaseBrowserAgent.html)
+  - [BaseBrowserLabelsAgent](/eko/docs/api/classes/BaseBrowserLabelsAgent.html)
+  - [BaseBrowserScreenAgent](/eko/docs/api/classes/BaseBrowserScreenAgent.html)
 
 ## Related Links
 - Available Tools
