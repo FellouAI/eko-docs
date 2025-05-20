@@ -18,22 +18,24 @@ Let's run an Eko workflow together in a browser extension to automate the task t
 - Turn on `Developer mode` (toggle switch in the top right corner).
 - Click `Load unpacked` button (the blue text in the top-left corner) and select the `dist` folder in the first step.
 
-*Picture here*
+<video controls>
+  <source src="../../../../public/quickstart/Lark20250520-153314.mp4" />
+</video>
 
 ### Configure LLM model API Key
 
 - If it's inconvenient to obtain an API key from the OpenAI or Claude platform, consider using proxy sites or services (such as [OpenRouter](https://openrouter.ai/)), and then replace the *Base URL* and *API key* with the corresponding values.
 
-*Picture here*
+<video controls>
+  <source src="../../../../public/quickstart/Lark20250520-153337.mp4" />
+</video>
 
 ### Let's run it!
-Open the side-bar of the extension:
+Open the side-bar of the extension, input your prompt, and click the Run button:
 
-*Picture here*
-
-Input your prompt, and click the Run button:
-
-*Picture here*
+<video controls>
+  <source src="../../../../public/quickstart/Lark20250520-153339-3x.mp4" />
+</video>
 
 ## Running a Node.js script
 
