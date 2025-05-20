@@ -245,3 +245,6 @@ let eko = new Eko({ llms, agents });
 let result = await eko.run("我有3000块钱，请帮我购买一套夏天衣服、裤子、鞋子");
 
 ```
+
+
+Learn more: [Agent Tools](/eko/docs/agents/agent-tools).
