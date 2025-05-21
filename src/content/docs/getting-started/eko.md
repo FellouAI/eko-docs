@@ -10,7 +10,7 @@ Eko (pronounced like “echo”) is a powerful framework designed for building p
 
 <!-- *TODO: update architecture.png* -->
 
-![](../assets/architecture.png)
+![](../assets/architecture-new-placeholder.png)
 
 # Framework Comparison
 

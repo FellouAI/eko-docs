@@ -9,9 +9,11 @@ Eko is a multi-agent workflow framework that enables multiple agents to collabor
 
 After the user inputs a prompt, the Planner will design the Workflow, and Eko will coordinate different Agents to perform various tasks based on the Workflow, finally returning the results to the user.
 
-## Core Components
+![](../assets/architecture-new-placeholder.png)
 
-### Workflow
+This section will introduce the core concepts of Eko.
+
+## Workflow
 
 Workflow is a DSL based on XML, designed to accurately and efficiently complete complex tasks. For example, if the user inputs the prompt `Open Twitter, search for "Fellou AI" and follow`, the Workflow might look like this:
 
@@ -43,7 +45,7 @@ Here:
 - The `<agents>` tag defines which Agents are needed for this workflow, and `<agent name="Browser">` specifies the use of the Browser Agent.
 - The `<node>` tags under `<nodes>` define a series of subtasks.
 
-### Agent
+## Agent
 
 Agent is the core driver of Eko. There is an Agent for each domain, such as the Browser Agent, Chat Agent, etc. Each Agent includes a set of tools, carefully crafted prompts, and a suitable LLM.
 
@@ -51,31 +53,29 @@ Agents follow a unified interface, including `name`, `description`, `tools`, and
 
 For more information, please refer to the [Agents](/eko/docs/agents) section.
 
-#### Planner
+### Planner
 
 The Planner is a special Agent responsible for generating Workflows and does not participate in the execution of the Workflow.
 
 Planner analyzes the user's natural language prompt, determines the required subtasks, and produces a structured XML-based Workflow. This planning phase is separate from execution, allowing users to inspect, modify, or reuse the generated plan before running it. The Planner ensures that the workflow is logically sound and that all dependencies between subtasks are respected.
 
-#### Tool
+### Tool
 
 Tools are reusable functional modules that perform specific operations within a workflow. Each Tool implements a standard interface with `name`, `description`, `input_schema`, and an `execute` method. Tools can be built-in (such as file operations, browser automation, or command execution) or custom-defined by users.
 
-#### MCP
+### MCP
 
 MCP (Model Context Protocol) is an architecture layer that enables dynamic expansion of agent capabilities. Through MCP, agents can access additional tools or services at runtime, such as external APIs or plugins. The MCP client manages communication and integration with these external resources, allowing for flexible and extensible workflows.
 
 MCP is especially useful for scenarios requiring integration with third-party systems or for dynamically loading new capabilities without redeploying the core framework.
 
-### Memory
-
-# Introduction to Memory Mechanism
+## Memory
 
 The Memory mechanism is a core function in the task processing system used for efficient management and optimization of contextual information. It extracts the tools actually used in tasks, removes redundant tool calls, compresses proxy messages, and processes large amounts of contextual messages, reducing unnecessary computation, optimizing task execution efficiency.
 
 In addition, the Memory mechanism supports task interruption and resumption by creating task snapshots to retain key information and node states, allowing tasks to continue execution in a more streamlined context.
 
-### LLM
+## LLM
 
 LLM (Large Language Model) integration is at the heart of Eko's planning and reasoning capabilities. Eko supports multiple LLM providers (such as Anthropic Claude and OpenAI) and allows configuration of model parameters, API keys, and endpoints.
 
