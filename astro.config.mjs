@@ -68,7 +68,7 @@ export default defineConfig({
 					items: [
 						// Each item here is one entry in the navigation menu.
 						{ label: 'Overview', slug: 'architecture' },
-						{ label: 'Hierarchical Planning', slug: 'architecture/execution-model' },
+						// { label: 'Execution model', slug: 'architecture/execution-model' },
 						// { label: 'Environment-Aware Architecture', slug: 'architecture/env-architecture' },
 						// { label: 'Workflow', slug: 'architecture/workflow' },
 						{ label: 'Callback system', slug: 'architecture/callback-system' },
