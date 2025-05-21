@@ -3,9 +3,7 @@ title: Configuration
 description: This guide covers how to configure Eko in different environments.
 ---
 
-This guide will walk you through configuring the parameters of Eko.
-
-As we have seen [before](./installation), `Eko()` accepts a parameter of type `EkoConfig`, which is defined as follows:
+As we have seen [before](./installation), [`Eko`](/eko/docs/api/classes/Eko.html) accepts a parameter of type [`EkoConfig`](/eko/docs/api/classes/Eko.html), which is defined as follows:
 ```ts
 type EkoConfig = {
   llms: LLMs;
@@ -16,6 +14,8 @@ type EkoConfig = {
   a2aClient?: IA2aClient;
 };
 ```
+
+This guide will walk you through configuring these parameters. You can also see [`EkoConfig`'s Reference](/eko/docs/api/types/EkoConfig.html) for code details.
 
 ## `EkoConfig.llms`
 
@@ -86,7 +86,7 @@ let eko = new Eko({ llms, planLlms: ["powerful"] });
 - `StreamCallback` allows you to receive streaming updates on workflow progress, tool usage, and results.
 - `HumanCallback` enables you to handle cases where human input or confirmation is required (e.g., when a user selects an option, confirms an action, or provides input).
 
-For more information, please refer to the [Callbacks](../architecture/hook-system) section.
+For more information, please refer to the [Callbacks](../architecture/callback-system) section.
 
 Example:
 ```ts
@@ -100,10 +100,6 @@ let callback = {
 
 `EkoConfig.defaultMcpClient` is an instance of `IMcpClient` used to handle communication with an MCP (Multi-Component Platform) backend. Set this if your agents/tools require backend orchestration or state management.
 
-<!-- *TODO: add refernce link* -->
-
 ## `EkoConfig.a2aClient`
 
 `EkoConfig.a2aClient` is an instance of `IA2aClient` for agent-to-agent communication. Use this if your workflow involves coordination or messaging between multiple agents.
-
-<!-- *TODO: add refernce link* -->
