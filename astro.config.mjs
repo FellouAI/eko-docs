@@ -71,7 +71,7 @@ export default defineConfig({
 						{ label: 'Hierarchical Planning', slug: 'architecture/execution-model' },
 						// { label: 'Environment-Aware Architecture', slug: 'architecture/env-architecture' },
 						// { label: 'Workflow', slug: 'architecture/workflow' },
-						{ label: 'Hook system', slug: 'architecture/hook-system' },
+						{ label: 'Callback system', slug: 'architecture/callback-system' },
 						{ label: 'Web Information Extraction', slug: 'architecture/web-extraction' },
 					],
 				},
