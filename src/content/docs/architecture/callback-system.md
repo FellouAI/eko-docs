@@ -16,19 +16,29 @@ With a special callbacks - *hooks*, developers can even:
 
 Callbacks in Eko are essential for maintaining system observability, controllability, and reliability, ensuring efficient, transparent, and secure operations.
 
-## Callback Types
-
-According to the communication methods, callbacks can be divided into two categories:
-- **Single Direction**: Can only read values, suitable for logging and monitoring scenarios (e.g., streaming updates about workflow progress, tool usage, and results).
-- **Double Direction (aka. Hooks)**: Can both read and modify values, which can be understood as middleware, suitable for highly customized scenarios (e.g., intercepting and modifying tool inputs/outputs, or workflow node execution).
-
-Based on the way they are invoked, callbacks can be divided into two categories:
-- **Once Invocation**: Conventional callbacks that are called only once at the appropriate time, such as `tool_result`.
-- **Streaming Invocation**: These are called multiple times over a period, each time returning the complete data available at that moment, such as `workflow`.
-
 ## Callback Domains
 
 Eko's callback system is divided into two main domains:
+
+1. **Stream Callback**: used for monitoring, logging, and UI updates.
+2. **Human Callbacks**: pause and request user input or confirmation.
+
+```typescript
+import { Eko, LLMs, StreamCallbackMessage } from "@eko-ai/eko";
+import { StreamCallback, HumanCallback } from "@eko-ai/eko/types";
+
+let callback: StreamCallback & HumanCallback = {
+  onMessage: async (message: StreamCallbackMessage) => {
+    /* monitor model realtime event and tool using params, modify tool result*/
+  },
+  onHumanConfirm: async (context, prompt) => {
+    /* showing prompt to user, user will confirm it or refuse it*/
+    return /* ture if confirmed, false if refused*/;
+  },
+};
+
+let eko = new Eko({ llms, agents, callback });
+```
 
 ### Stream Callback
 
@@ -49,6 +59,94 @@ Stream callbacks provide real-time, updates about workflow execution. They are u
 
 See [`StreamCallback`](/eko/docs/api/interfaces/StreamCallback.html) and [`StreamCallbackMessage`](/eko/docs/api/types/StreamCallbackMessage.html) for the full type definition.
 
+#### Usage
+
+```typescript
+import { Eko, LLMs, StreamCallbackMessage } from "@eko-ai/eko";
+import { StreamCallback, HumanCallback } from "@eko-ai/eko/types";
+
+let callback: StreamCallback & HumanCallback = {
+  onMessage: async (message: StreamCallbackMessage) => {
+    // Wait for stream done and do something important ...
+    if(message.streamDone) {
+      switch(message.type) {
+        case "workflow":
+          // Emitted when a workflow is generating or updating.
+          break;
+        case "text":
+          // Emitted for streaming text output from the agent or LLM.
+          break;
+        case "tool_streaming":
+          // Emitted for streaming tool call.
+          break;
+        case "tool_use":
+          // Emitted before a tool is executed, includes tool name and parameters.
+          break;
+        case "tool_result":
+          // Emitted after a tool finishes execution, includes the result.
+          break;
+        case "...":
+          // Other events.
+          break;
+      }
+    }
+  },
+};
+
+let eko = new Eko({ llms, agents, callback });
+```
+
+#### Intervene in the input and output of the tools called by the model
+
+```typescript
+
+// navigate_to tool definition
+{
+  name: "navigate_to",
+  description: "Navigate to a specific url",
+  parameters: {
+    type: "object",
+    properties: {
+      url: {
+        type: "string",
+        description: "The url to navigate to",
+      },
+    },
+    required: ["url"],
+  }
+}
+
+// Intervene in the input and output of the tools called by the model
+let callback: StreamCallback = {
+  onMessage: async (message: StreamCallbackMessage) => {
+    switch(message.type) {
+      case "tool_use":
+        // Intervene in the input
+        if (message.agentName == "Browser" && message.toolName == "navigate_to") {
+          // Modify the return result of the navigate_to tool, in this case, change "twitter" to "x".
+          // The URL parameter in message.params.url is defined in the `properties` parameter of the navigate_to tool. 
+          if (message.params.url == "https://twitter.com") {
+            message.params.url = "https://x.com";
+          }
+        }
+        break;
+      case "tool_result":
+        // Intervene in the output
+        if (message.agentName == "File" && message.toolName == "file_read") {
+          if (message.params.path == "/account.md") {
+            let content = message.toolResult.content;
+            if (content[0].type == "text") {
+              // Filter sensitive information through intervention in the output.
+              content[0].text = content[0].text.replace("This is password", "********");
+            }
+          }
+        }
+        break;
+    }
+  }
+};
+```
+
 ### Human Callbacks
 
 Human callbacks enable human-in-the-loop interaction, allowing the workflow to pause and request user input or confirmation.
@@ -62,7 +160,42 @@ Human callbacks enable human-in-the-loop interaction, allowing the workflow to p
 
 See [`HumanCallback`](/eko/docs/api/interfaces/HumanCallback.html) for the full interface.
 
-## Using Callbacks
+#### HumanInteractTool
+The Human Callbacks are triggered by the HumanInteractTool, and the prompt is defined as follows:
+```md
+AI interacts with humans:
+confirm: Ask the user to confirm whether to execute an operation, especially when performing dangerous actions such as deleting system files.
+input: Prompt the user to enter text; for example, when a task is ambiguous, the AI can choose to ask the user for details, and the user can respond by inputting.
+select: Allow the user to make a choice; in situations that require selection, the AI can ask the user to make a decision.
+request_help: Request assistance from the user; for instance, when an operation is blocked, the AI can ask the user for help, such as needing to log into a website or solve a CAPTCHA.
+```
+
+#### Usage
+
+```typescript
+import { Eko, LLMs, StreamCallbackMessage } from "@eko-ai/eko";
+import { StreamCallback, HumanCallback } from "@eko-ai/eko/types";
+
+let callback: StreamCallback & HumanCallback = {
+  onHumanConfirm: async (message: StreamCallbackMessage) => {
+    // Wait for stream done and do something important ...
+    return confirm(prompt);
+  },
+  onHumanInput: async (message: StreamCallbackMessage) => {
+    // Wait for stream done and do something important ...
+  },
+  onHumanSelect: async (message: StreamCallbackMessage) => {
+    // Wait for stream done and do something important ...
+  },
+  onHumanHelp: async (message: StreamCallbackMessage) => {
+    // Wait for stream done and do something important ...
+  },
+};
+
+let eko = new Eko({ llms, agents, callback });
+```
+
+## Callbacks use case
 
 This example uses `onMessage` to log the workflow, large language model responses, and tool invocation parameters to the log, and it also implements the `onHumanConfirm` interface to allow users to confirm certain operations:
 
@@ -98,74 +231,12 @@ let callback: StreamCallback & HumanCallback = {
 let eko = new Eko({ llms, agents, callback });
 ```
 
-## Common Use Cases
+## Callback Types
 
-Here are some possible use cases listed.
+According to the communication methods, callbacks can be divided into two categories:
+- **Single Direction**: Can only read values, suitable for logging and monitoring scenarios (e.g., streaming updates about workflow progress, tool usage, and results).
+- **Double Direction (aka. Hooks)**: Can both read and modify values, which can be understood as middleware, suitable for highly customized scenarios (e.g., intercepting and modifying tool inputs/outputs, or workflow node execution).
 
-### 1. Performance Monitoring
-
-```typescript
-const performanceCallback = {
-  onMessage: async (message) => {
-    if (message.type === "tool_result") {
-      console.log(
-        `[PERF] Tool ${message.toolName} executed with params:`,
-        message.params,
-        "Result:",
-        message.toolResult
-      );
-    }
-    if (message.type === "finish") {
-      console.log("[PERF] Workflow finished. Usage:", message.usage);
-    }
-  },
-};
-```
-
-### 2. Tool Input Validation
-
-```typescript
-const validationCallback = {
-  beforeToolUse: async (tool, context, input) => {
-    // Validate or sanitize input before tool execution
-    if (tool.name === "file_write" && input.path.endsWith(".exe")) {
-      throw new Error("Writing to .exe files is not allowed!");
-    }
-    return input;
-  },
-};
-```
-
-### 3. Result Processing
-
-```typescript
-const processingCallback = {
-  afterToolUse: async (tool, context, result) => {
-    // Post-process tool results, e.g., mask sensitive data
-    if (tool.name === "file_read" && typeof result === "string") {
-      return result.replace(/password:.*/gi, "password: [REDACTED]");
-    }
-    return result;
-  },
-};
-```
-
-### 4. Error Handling
-
-```typescript
-const errorCallback = {
-  onMessage: async (message) => {
-    if (message.type === "error") {
-      // Custom error handling logic
-      alert("An error occurred: " + message.error);
-    }
-  },
-  afterToolUse: async (tool, context, result) => {
-    if (result && result.error) {
-      // Handle tool-specific errors
-      console.error(`Error in tool ${tool.name}:`, result.error);
-    }
-    return result;
-  },
-};
-```
+Based on the way they are invoked, callbacks can be divided into two categories:
+- **Once Invocation**: Conventional callbacks that are called only once at the appropriate time, such as `tool_result`.
+- **Streaming Invocation**: These are called multiple times over a period, each time returning the complete data available at that moment, such as `workflow`.
