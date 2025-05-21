@@ -206,45 +206,10 @@ let result = await eko.run("Read the desktop test.txt file");
 
 ```
 
-### MCP dynamic expansion tool
+## Next Steps
 
-Agent supports dynamic loading of tools through MCP.
-
-```typescript
-import { Eko, Agent, LLMs, SimpleSseMcpClient } from "@eko-ai/eko";
-
-const llms: LLMs = {
-  default: {
-    provider: "anthropic",
-    model: "claude-3-5-sonnet-20241022",
-    apiKey: "your_api_key",
-  },
-  openai: {
-    provider: "openai",
-    model: "gpt-4o-mini",
-    apiKey: "your_api_key",
-  },
-};
-
-// your mcp server
-let sseUrl = "http://localhost:8083/sse";
-let mcpClient = new SimpleSseMcpClient(sseUrl);
-
-// Custom SmartMall agent
-let agents: Agent[] = [
-  new Agent({
-    name: "SmartMall",
-    description: "Provide product query and order placement",
-    tools: [],
-    mcpClient: mcpClient,
-    llms: Object.keys(llms),
-  }),
-];
-
-let eko = new Eko({ llms, agents });
-let result = await eko.run("I have $300, please help me buy a set of summer clothes, pants, and shoes.");
-
-```
-
+Now that you have understood the concept of an custom agent, Let's take a look at how tools are defined:
 
 Learn more: [Agent Tools](/eko/docs/agents/agent-tools).
+
+Learn more: [MCP Tools](/eko/docs/agents/mcp-tools).

@@ -61,6 +61,7 @@ export default defineConfig({
 						{ label: 'Browser Agent', slug: 'agents/browser-agent' },
 						{ label: 'Custom Agent', slug: 'agents/custom-agent' },
 						{ label: 'Agent Tools', slug: 'agents/agent-tools' },
+						{ label: 'MCP Tools', slug: 'agents/mcp-tools' },
 					],
 				},
 				{

@@ -22,6 +22,7 @@ There are two ways to build a browser extension using Eko.
    ```bash
    # install cli (used to initialize browser extension projects)
    pnpm install @eko-ai/eko-cli -g
+   
    # initialize project
    eko-cli init my-extension-demo
    cd my-extension-demo
@@ -142,7 +143,7 @@ export async function auto_test_case() {
 
 ## Build from eko source code
 
-### Install
+### Clone & Build
 ```bash
 # clone eko project
 git clone https://github.com/FellouAI/eko.git
