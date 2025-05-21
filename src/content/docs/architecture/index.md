@@ -3,115 +3,80 @@ title: Architecture Overview
 description: This conceptual guide introduces the key architectural principles and design patterns that power Eko's natural language automation capabilities.
 ---
 
-This section provides a conceptual overview of Eko's architecture. While the implementation details may vary, understanding these core principles will help you effectively build and maintain Eko-based automation.
+Eko is a framework designed for building production-ready Agent workflows. It provides an efficient, cross-platform solution for automating the planning and execution of workflows. Additionally, Eko offers highly customizable interfaces that empower developers to design workflows freely, ensuring they meet production-level requirements.
 
-![](../assets/architecture.png)
+Eko is a multi-agent workflow framework that enables multiple agents to collaborate through workflow planning, providing production-ready capabilities.
 
-## Hierarchical Planning
-At the heart of Eko is a hierarchical planning framework that separates task planning from execution:
+After the user inputs a prompt, the Planner will design the Workflow, and Eko will coordinate different Agents to perform various tasks based on the Workflow, finally returning the results to the user.
 
-### Planning Layer (eko.generate)
+## Core Components
 
-- Converts natural language descriptions into structured workflows
-- Uses LLMs (Claude/OpenAI) to break down complex tasks into discrete steps
-- Validates workflow structure and tool requirements before execution
-- Creates reusable, inspectable workflow definitions
+### Workflow
 
-### Execution Layer (eko.execute)
+Workflow is a DSL based on XML, designed to accurately and efficiently complete complex tasks. For example, if the user inputs the prompt `Open Twitter, search for "Fellou AI" and follow`, the Workflow might look like this:
 
-- Dynamically executes workflows while adapting to runtime conditions
-- Handles tool selection and sequencing based on context
-- Manages dependencies between workflow nodes
-- Provides hook-based execution control
+```xml
+<root>
+  <name>Follow Fellou AI on Twitter</name>
+  <thought>The user wants to search for "Fellou AI" on Twitter and follow the account. This is a simple task that can be accomplished using the Browser agent to navigate Twitter, perform the search, and follow the account.</thought>
+  <agents>
+    <agent name="Browser">
+      <task>Search and follow Fellou AI on Twitter</task>
+      <nodes>
+        <node>Navigate to https://twitter.com</node>
+        <node>Click on the search box</node>
+        <node>Input text "Fellou AI" into the search box</node>
+        <node>Press Enter to perform the search</node>
+        <node>Extract page content to find the Fellou AI account</node>
+        <node>Click the "Follow" button for the Fellou AI account</node>
+      </nodes>
+    </agent>
+  </agents>
+</root>
+```
 
-![](../assets/hierarchical_planning.png)
+> You can try running it with a browser extension; or register a [`Stream Callback`](/eko/docs/architecture/callback-system#stream-callback) in your script. The `StreamCallbackMessage` of type `workflow` will provide the Workflow value for inspection.
 
-Learn more in [Hierarchical Planning](/docs/architecture/execution-model).
+Here:
+- The `<name>` tag is the name of the workflow.
+- The `<thought>` tag is the thought process when generating the workflow.
+- The `<agents>` tag defines which Agents are needed for this workflow, and `<agent name="Browser">` specifies the use of the Browser Agent.
+- The `<node>` tags under `<nodes>` define a series of subtasks.
 
-## Web Information Extraction
+### Agent
 
-![](../assets/element_extraction.png)
-Eko employs an innovative approach to web information through:
+Agent is the core driver of Eko. There is an Agent for each domain, such as the Browser Agent, Chat Agent, etc. Each Agent includes a set of tools, carefully crafted prompts, and a suitable LLM.
 
-- Identifies and tags interactive elements on web pages with unique IDs
-- Creates visual overlays showing element relationships
-- Combines screenshots with pseudo-HTML for robust element identification
-- Enhances accuracy of browser automation through combined visual and structural understanding
+Agents follow a unified interface, including `name`, `description`, `tools`, and optional LLM model configuration. They encapsulate domain-specific logic and can be extended or customized for different environments. Agents are responsible for decomposing high-level tasks into actionable subtasks and selecting the appropriate tools for execution.
 
-This technology is particularly important for browser automation tasks, providing reliable element identification across different page states. Learn more in [Web Information Extraction](/docs/architecture/web-extraction).
+For more information, please refer to the [Agents](/eko/docs/agents) section.
 
-## Environment-Aware Architecture
+#### Planner
 
-Eko provides consistent capabilities across different JavaScript environments while adapting to each environment's unique constraints:
+The Planner is a special Agent responsible for generating Workflows and does not participate in the execution of the Workflow.
 
-### Browser Extension Environment
+Planner analyzes the user's natural language prompt, determines the required subtasks, and produces a structured XML-based Workflow. This planning phase is separate from execution, allowing users to inspect, modify, or reuse the generated plan before running it. The Planner ensures that the workflow is logically sound and that all dependencies between subtasks are respected.
 
-- Full browser automation capabilities
-- Tab and window management
-- DOM interaction and content extraction
-- Cross-origin communication handling
+#### Tool
 
-### Web Environment
+Tools are reusable functional modules that perform specific operations within a workflow. Each Tool implements a standard interface with `name`, `description`, `input_schema`, and an `execute` method. Tools can be built-in (such as file operations, browser automation, or command execution) or custom-defined by users.
 
-- Sandboxed operation for web applications
-- DOM manipulation and event handling
-- Content extraction and processing
-- Secure API endpoint integration
+#### MCP
 
-### Node.js Environment
+MCP (Model Context Protocol) is an architecture layer that enables dynamic expansion of agent capabilities. Through MCP, agents can access additional tools or services at runtime, such as external APIs or plugins. The MCP client manages communication and integration with these external resources, allowing for flexible and extensible workflows.
 
-- System-level file operations
-- Command execution and process management
-- Full access to Node.js APIs
-- Direct access to local resources
+MCP is especially useful for scenarios requiring integration with third-party systems or for dynamically loading new capabilities without redeploying the core framework.
 
-See [Environment-Aware Architecture](/docs/architecture/env-architecture) for details on how Eko adapts to each environment.
+### Memory
 
-## Agent System
+# Introduction to Memory Mechanism
 
-Agents are the building blocks of automation in Eko:
+The Memory mechanism is a core function in the task processing system used for efficient management and optimization of contextual information. It extracts the tools actually used in tasks, removes redundant tool calls, compresses proxy messages, and processes large amounts of contextual messages, reducing unnecessary computation, optimizing task execution efficiency.
 
-### Agent Definition
+In addition, the Memory mechanism supports task interruption and resumption by creating task snapshots to retain key information and node states, allowing tasks to continue execution in a more streamlined context.
 
-- Each agent has a unique name and description
-- Must include one or more tools
+### LLM
 
-### Agent Tool
+LLM (Large Language Model) integration is at the heart of Eko's planning and reasoning capabilities. Eko supports multiple LLM providers (such as Anthropic Claude and OpenAI) and allows configuration of model parameters, API keys, and endpoints.
 
-- Each tool has a unique name and description
-- Defines its input schema and requirements
-- Implements specific execution logic
-- Can access shared execution context
-
-Learn more in the documentation on [Agents Overview](/eko/docs/agents).
-
-## Hook System
-
-Hooks provide deep visibility and control over workflow execution:
-
-### Workflow Hooks
-
-- beforeWorkflow/afterWorkflow for setup and cleanup
-- Access to workflow-level state and variables
-- Control over workflow initialization and completion
-
-### Subtask Hooks
-
-- beforeSubtask/afterSubtask for node-level control
-- Monitor and modify subtask execution
-- Access to execution context and results
-
-### Tools Hook
-
-- beforeToolUse/afterToolUse for fine-grained control
-- Modify tool inputs and outputs
-- Implement custom error handling and recovery
-
-Learn more in [Hook System](/docs/architecture/hook-system).
-
-## Next Steps
-
-- Understand how workflows are structured in [Workflow Structure](/docs/architecture/workflow)
-- Learn about browser automation in [Web Extraction Technology](/docs/architecture/web-extraction)
-- Explore tool development in [Tools Overview](/docs/tools/overview)
-- Master execution control with the [Hook System](/docs/architecture/hook-system)
+LLMs are used for both workflow planning (by the Planner) and for certain agent operations that require language understanding or generation. The framework provides retry and fallback mechanisms to ensure robust LLM interactions.
