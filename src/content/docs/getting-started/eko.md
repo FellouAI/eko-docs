@@ -1,5 +1,5 @@
 ---
-title: Eko Overview
+title: Eko 2.0 Overview
 description: Eko (pronounced like “echo”) is a powerful framework designed for building production-ready Agent workflows.
 ---
 
@@ -8,9 +8,26 @@ description: Eko (pronounced like “echo”) is a powerful framework designed f
 ## What is Eko?
 Eko (pronounced like “echo”) is a powerful framework designed for building production-ready Agent workflows. It provides an efficient, cross-platform solution for automating the planning and execution of workflows. Additionally, Eko offers highly customizable interfaces that empower developers to design workflows freely, ensuring they meet production-level requirements.
 
-<!-- *TODO: update architecture.png* -->
+## SOTA on Online-mind2web benchmark
+![](../../../assets/Fellouwithekov2_online_mind2web.png)
 
+## Eko 2.0 High level Architecture
 ![](../assets/architecture-new-placeholder.png)
+
+## Eko 2.0 vs Eko 1.0
+| Feature                                 | Eko 2.0                | Eko 1.0   |
+| --------------------------------------- | ------------------- | ----------- |
+| **Speed**                  | **1.2x Fast**    | Slow |
+| **Multi Agent** | ✅                   | ❌           |
+| **Watch to DOM event & loop tasks**     | ✅ | ❌           |
+| **MCP / Tools**                     | ✅                   | ❌           |
+| **A2A**     | ✅ (Coming Soon) | ❌           |
+| **Dynamic LLM Config**              | ✅            | ❌         |
+| **Planning**                         | Stream Planning & RePlan                   | Simple Plan           |
+| **ReAct**     | ✅ | ✅           |
+| **Callback**     | Stream Callback & Human Callback | Simple Hooks           |
+| **Callback Chain**     | Stream Callback & Human Callback | Simple Hooks           |
+| **Node.js with Playwright**     | ✅ | ✅           |
 
 # Framework Comparison
 
