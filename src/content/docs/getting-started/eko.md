@@ -29,6 +29,9 @@ Eko (pronounced like “echo”) is a powerful framework designed for building p
 | **Callback Chain**     | Stream Callback & Human Callback | Simple Hooks           |
 | **Node.js with Playwright**     | ✅ | ✅           |
 
+
+![](../assets/v1_v2.jpeg)
+
 # Framework Comparison
 
 | Feature                                 | Eko                 | Langchain   | Browser-use | Dify.ai | Coze |
