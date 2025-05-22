@@ -10,7 +10,6 @@ Eko (pronounced like “echo”) is a powerful framework designed for building p
 
 ## SOTA on Online-mind2web benchmark
 ![](../../../assets/Fellouwithekov2_online_mind2web.png)
-
 ## Eko 2.0 High level Architecture
 ![](../assets/architecture-new-placeholder.png)
 
@@ -29,9 +28,8 @@ Eko (pronounced like “echo”) is a powerful framework designed for building p
 | **Callback Chain**     | Stream Callback & Human Callback | Simple Hooks           |
 | **Node.js with Playwright**     | ✅ | ✅           |
 
-
+Eko 2.0 achieves 80% success rate on the Online-Mind2web benchmark, compared to 31% for Eko 1.0. This performance improvement reflects the architectural enhancements and optimizations Fellou has implemented in the new version, making Eko 2.0 significantly more reliable for production workflows.
 ![](../assets/v1_v2.jpeg)
-
 # Framework Comparison
 
 | Feature                                 | Eko                 | Langchain   | Browser-use | Dify.ai | Coze |
