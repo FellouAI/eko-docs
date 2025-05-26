@@ -29,7 +29,7 @@ Eko (pronounced like “echo”) is a powerful framework designed for building p
 | **Node.js with Playwright**     | ✅ | ✅           |
 
 Eko 2.0 achieves 80% success rate on the Online-Mind2web benchmark, compared to 31% for Eko 1.0. This performance improvement reflects the architectural enhancements and optimizations Fellou has implemented in the new version, making Eko 2.0 significantly more reliable for production workflows.
-![](../assets/v1_v2.jpeg)
+![](../assets/Fellouwithekov2_Fellouwithekov1_Browseruse.png)
 # Framework Comparison
 
 | Feature                                 | Eko                 | Langchain   | Browser-use | Dify.ai | Coze |
