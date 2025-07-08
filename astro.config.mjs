@@ -3,6 +3,7 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://fellou.ai',
 	base: '/eko/docs',
 	output: 'static',
 	outDir: './dist',
