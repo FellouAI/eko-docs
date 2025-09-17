@@ -5,6 +5,18 @@ description: Eko version update history
 
 Eko NPM: [@eko-ai/eko](https://www.npmjs.com/package/@eko-ai/eko).
 
+## v3.0.3 - 2025-09-15
+
+### Overview
+- Introduces dependency-aware parallel agent scheduling and built-in interruption controls.
+
+### Breaking Changes
+- Updated workflow schema and agent definitions; 2.x workflows must be regenerated for 3.x.
+
+### Improvements
+- **eko-core:** Parallel execution engine, pause/resume APIs, `task_snapshot` recovery tool.
+- **repo:** Migrated the monorepo to pnpm for consistent dependency management.
+
 ## v2.0.8 - 2025-05-20
 
 ### Overview
