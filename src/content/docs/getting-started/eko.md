@@ -1,5 +1,5 @@
 ---
-title: Eko 2.0 Overview
+title: Eko 3.0 Overview
 description: Eko (pronounced like “echo”) is a powerful framework designed for building production-ready Agent workflows.
 ---
 
@@ -10,8 +10,24 @@ Eko (pronounced like “echo”) is a powerful framework designed for building p
 
 ## SOTA on Online-mind2web benchmark
 ![](../../../assets/Fellouwithekov2_online_mind2web.png)
-## Eko 2.0 High level Architecture
+## Eko 3.0 High level Architecture
 ![](../assets/architecture-new-placeholder.png)
+
+## What's new in Eko 3.0
+- Dependency-aware parallel agent execution shortens long-running workflows.
+- Built-in pause, resume, and interrupt controls capture `task_snapshot` state for recovery.
+- The monorepo now standardizes on pnpm, so install and link steps stay consistent across packages.
+
+## Eko 3.0 vs Eko 2.0
+| Feature | Eko 3.0 | Eko 2.0 |
+| --- | --- | --- |
+| Agent orchestration | Parallel + sequential execution via dependency trees | Sequential multi-agent execution |
+| Task control | Pause, resume, and abort with recovery snapshots | Manual stop/restart only |
+| Workflow compatibility | v3 workflow schema (breaking change) | v2 workflow schema |
+| Built-in tooling | `task_snapshot` recovery tool, improved context management | No snapshot tooling |
+| Package management | pnpm workspace with unified scripts | Mixed npm/yarn setup |
+
+Eko 3.0 maintains the 80% success rate on the Online-Mind2web benchmark introduced in 2.0, while adding concurrency and recovery controls for production stability.
 
 ## Eko 2.0 vs Eko 1.0
 | Feature                                 | Eko 2.0                | Eko 1.0   |
